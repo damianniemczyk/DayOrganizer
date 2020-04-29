@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="DayOrganizer.InternetView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DayOrganizer"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="500" 
+             Style="{DynamicResource UserControlForm}">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/DayOrganizer;component/Commons/ControlStyles/ButtonAction.xaml"/>
+                <ResourceDictionary Source="/DayOrganizer;component/Commons/ControlStyles/UserControlForm.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <DockPanel Margin="20">
+        <DockPanel DockPanel.Dock="Top">
+            <Canvas>
+                <TextBox Name="textBoxOutput" Text="{Binding Path=TextBoxString}"
+                         local:TextBoxBehavior.ScrollOnTextChanged="True" VerticalScrollBarVisibility="Auto" 
+                         Height="250" Width="460" DockPanel.Dock="Left"/>
+                <Button Content="Check" Name="buttonCheck" Command="{Binding Path=CheckCommand}"
+                        Style="{DynamicResource ButtonAction}" DockPanel.Dock="Left" Canvas.Top="280" />
+                <Button Content="Connect" Name="buttonConnect" Command="{Binding Path=ConnectCommand}"
+                        Style="{DynamicResource ButtonAction}" DockPanel.Dock="Left" Canvas.Top="320" />
+                <Button Content="Disconnect" Name="buttonDisconnect" Command="{Binding Path=DisconnectCommand}"
+                        Style="{DynamicResource ButtonAction}" DockPanel.Dock="Left" Canvas.Top="320" Canvas.Left="115" />
+                <Button Content="Connect VM" Name="buttonConnectVM" Command="{Binding Path=ConnectVMCommand}"
+                        Style="{DynamicResource ButtonAction}" DockPanel.Dock="Left" Canvas.Top="360" />
+                <Button Content="Disconnect VM" Name="buttonDisonnectVM" Command="{Binding Path=DisconnectVMCommand}"
+                        Style="{DynamicResource ButtonAction}" DockPanel.Dock="Left" Canvas.Top="360" Canvas.Left="115" />
+                <Button Content="Clear" x:Name="buttonClear" Command="{Binding Path=ClearCommand}"
+                        Style="{DynamicResource ButtonAction}" Canvas.Top="280" Canvas.Left="360" />
+            </Canvas>
+        </DockPanel>
+    </DockPanel>
+</UserControl>

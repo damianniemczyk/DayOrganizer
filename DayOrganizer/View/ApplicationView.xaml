@@ -1,0 +1,45 @@
+﻿<Window x:Class="DayOrganizer.ApplicationView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:DayOrganizer"
+        Title="Day Organizer" Height="500" Width="600"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <DataTemplate DataType="{x:Type local:HomeViewModel}">
+                <local:HomeView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type local:DailyTaskViewModel}">
+                <local:DailyTaskView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type local:InternetViewModel}">
+                <local:InternetView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type local:ToolsViewModel}">
+                <local:ToolsView />
+            </DataTemplate>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/DayOrganizer;component/Commons/ControlStyles/ButtonMenu.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <DockPanel Background="Gray">
+        <Border DockPanel.Dock="Left" BorderBrush="Black" Margin="0,20,0,0">
+            <ItemsControl ItemsSource="{Binding PageViewModels}" >
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Content="{Binding Name}"
+                                Command="{Binding DataContext.ChangePageCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                                CommandParameter="{Binding }"
+                                Style="{DynamicResource ButtonMenu}"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Border>
+
+        <ContentControl Content="{Binding CurrentPageViewModel}" />
+    </DockPanel>
+</Window>

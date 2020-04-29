@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="DayOrganizer.DailyTaskView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="500" 
+             Style="{DynamicResource UserControlForm}">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/DayOrganizer;component/Commons/ControlStyles/ButtonAction.xaml"/>
+                <ResourceDictionary Source="/DayOrganizer;component/Commons/ControlStyles/UserControlForm.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+        <!-- DataTemplate (View) for DailyTask Model 
+        <DataTemplate DataType="{x:Type local:List<DailyTaskModel>}">
+            <Border BorderBrush="Black" BorderThickness="1" Padding="20" Background="LightBlue">
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Background="White">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Column="0" Grid.Row="0" Text="ID" Margin="5" Width="120"/>
+                    <TextBlock Grid.Column="1" Grid.Row="0" Text="Name" Margin="5" Width="120"/>
+                    <TextBlock Grid.Column="2" Grid.Row="0" Text="Unit Price" Margin="5" Width="120"/>
+
+                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding DailyTaskId}" Margin="5" Width="120"/>
+                    <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding DailyTaskName}" Margin="5" Width="120"/>
+                    <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding UnitPrice}" Margin="5" Width="120"/>
+                </Grid>
+            </Border>
+        </DataTemplate>-->
+
+    </UserControl.Resources>
+
+    <DockPanel Margin="20" >
+        <DockPanel DockPanel.Dock="Top" MinHeight="380">
+            <Border BorderBrush="Black" BorderThickness="1" Padding="20" Background="LightBlue">
+                <DataGrid ItemsSource="{Binding Path=CurrentDailyTasks}" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding RecordId}" Header="Id" Width="*" />
+                        <DataGridTextColumn Binding="{Binding DailyTaskName}" Header="Name" Width="*" />
+                        <DataGridTextColumn Binding="{Binding UnitPrice}" Header="Unit Price" Width="*" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
+        </DockPanel>
+
+        <DockPanel DockPanel.Dock="Bottom">
+            <TextBlock DockPanel.Dock="Left" Text="Enter DailyTask Id" VerticalAlignment="Bottom" />
+
+            <TextBox Margin="10,0" Width="50" VerticalAlignment="Bottom" Text="{Binding Path=DailyTaskId, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Button Content="Save DailyTask" DockPanel.Dock="Right" Margin="0" VerticalAlignment="Bottom"
+                        Command="{Binding Path=SaveDailyTaskCommand}" Style="{DynamicResource ButtonAction}" />
+
+            <Button Content="Get DailyTask" DockPanel.Dock="Right" Margin="0" VerticalAlignment="Bottom"
+                        Command="{Binding Path=GetDailyTaskCommand}" Style="{DynamicResource ButtonAction}" IsDefault="True"/>
+        </DockPanel>
+
+    </DockPanel>
+</UserControl>
